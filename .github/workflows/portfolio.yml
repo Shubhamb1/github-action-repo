@@ -16,10 +16,11 @@ jobs:
         environment: 
             name: github-pages
             url: ${{ steps.deployment.outputs.page_url }}
+
         steps:
             # get access to your Portfolio code vai ore-built actions
             - name: Checkout Code
-              uses: actions/checkout@4
+              uses: actions/checkout@v4
 
             # setup GitHub Pages
             # clones or checks out the code where this workflow written
@@ -29,6 +30,8 @@ jobs:
             #static code artifacts
             - name: Upload static files
               uses: actions/upload-pages-artifact@v4
+              with:
+                path: "."
 
             - name: Deploy to GitHub pages
               uses: actions/deploy-pages@v4
