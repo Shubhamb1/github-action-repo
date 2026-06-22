@@ -10,7 +10,8 @@ jobs:
         uses: ./.github/workflows/code-quality.yml
 
     secrets-scan:  
-        uses: ./.github/workflows/secrets-scan.yml  
+        uses: ./.github/workflows/secrets-scan.yml
+        secrets: inherit
     
     dependancy-scan:
         uses: ./.github/workflows/dependency-scan.yml
