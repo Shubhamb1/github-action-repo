@@ -8,7 +8,7 @@ jobs:
         runs-on: ubuntu-latest
         env:
            DOCKERHUB_USER: ${{ vars.DOCKERHUB_USER }}
-           DOCKER_TAG: ${{ github.event.workflow_run.head_sha }}
+           DOCKER_TAG: ${{ github.sha }}
 
         steps:
             - name: checkout code
@@ -16,7 +16,7 @@ jobs:
 
             - name: Set DOCKER_TAG environment variable
               run:
-                echo "DOCKER_TAG=${{ github.event.workflow_run.head_sha }}" >> $GITHUB_ENV
+                echo "DOCKER_TAG=${{ github.sha }}" >> $GITHUB_ENV
 
             - name: SSH to Prod Server
               uses: appleboy/ssh-action@v1.0.3
@@ -51,7 +51,9 @@ jobs:
                  echo "Running App"
                  export DOCKERHUB_USER=${{ vars.DOCKERHUB_USER }}
                  export DOCKER_TAG=${{ github.event.workflow_run.head_sha }}
-                
+                 export DOCKER_TAG=${{ github.sha }}
+                 echo "DOCKERHUB_USER=$DOCKERHUB_USER"
+                 echo "DOCKER_TAG=$DOCKER_TAG"
                  echo ${{ secrets.DOCKERHUB_TOKEN }} | docker login --username ${{ vars.DOCKERHUB_USER }} --password-stdin
                  cd ~/devops
                  sudo docker compose down
