@@ -50,7 +50,6 @@ jobs:
                 script: |
                  echo "Running App"
                  export DOCKERHUB_USER=${{ vars.DOCKERHUB_USER }}
-                 export DOCKER_TAG=${{ github.event.workflow_run.head_sha }}
                  export DOCKER_TAG=${{ github.sha }}
                  echo "DOCKERHUB_USER=$DOCKERHUB_USER"
                  echo "DOCKER_TAG=$DOCKER_TAG"
